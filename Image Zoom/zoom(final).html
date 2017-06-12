@@ -1,0 +1,92 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>点击实现图片的放大缩小(最终)</title>
+<style>
+body,div,span{
+	margin:0;
+	padding:0;
+	}
+img{
+	
+	margin-left:10%;
+	padding-top:70px;
+	
+}
+#anniu{
+	margin-left:15%;
+	margin-top:10px;
+	
+}
+</style>
+
+
+</head>
+	
+<body>
+	<img src="img/2.jpg" id="myimg">
+	<br/>
+	<div id="anniu">
+	<input type="button" name="" value="放大" id="max">
+	<input type="button" name="" value="缩小" id="min"></div>
+
+<script type="text/javascript">
+	window.onload=function(){
+		var maxbtn=document.getElementById('max');
+		var minbtn=document.getElementById('min');
+		var mg=document.getElementById('myimg');
+
+		var maxw=mg.width*1.8;//宽放大的极限
+		var maxh=mg.height*1.8;
+		var minw=mg.width*0.5;//宽放大的极限
+		var minh=mg.height*0.5;
+		maxbtn.onclick=function(){
+
+			 maxfun(mg,1.3,1.3,1.05,1.05,maxw);
+		}
+		minbtn.onclick=function(){
+			 minfun(mg,0.7,0.7,0.95,0.95,minw);
+		}
+		//实现放大函数
+		function maxfun(obj,a,b,c,d,itarget){
+		var endw=obj.width*a;
+		var endh=obj.height*b;
+		var maxTimer=setInterval(function(){
+			if(obj.width<endw){
+				 if(obj.width<itarget){
+				 	obj.width=obj.width*c;
+				 	obj.height=obj.height*d;
+				}else{
+					clearInterval(maxTimer);
+					alert("该图片已经到极限了哦！");
+				 }
+			}else{
+				clearInterval(maxTimer);	
+			}
+				
+		},20);
+		}
+		function minfun(obj,a,b,c,d,itarget){
+		var endw=obj.width*a;
+		var endh=obj.height*b;
+		var maxTimer=setInterval(function(){
+			if(obj.width>endw){
+				 if(obj.width>itarget){
+				 	obj.width=obj.width*c;
+				 	obj.height=obj.height*d;
+				}else{
+					clearInterval(maxTimer);
+					alert("该图片已经到极限了哦！");
+				 }
+			}else{
+				clearInterval(maxTimer);	
+			}
+				
+		},20);
+		}
+	}
+</script>	
+</body>
+</html>
